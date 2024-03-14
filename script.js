@@ -1,82 +1,84 @@
-const Player = (function() {
-    const dialog = document.querySelector("dialog");
-    const formPlayerName = document.querySelector("#player_name");
+function Player () {
+    const playerName = document.querySelector("#player_name");
     const submitBtn = document.querySelector("#submit_button");
     const xmarker = document.querySelector("#xmarker");
     const omarker = document.querySelector("#omarker");
-    let playerName = "";
-    let playerMarker = "";
-    const GetPlayerInfo = (function() {
-        dialog.showModal();
-        submitBtn.addEventListener("click", () => {
-            playerName = formPlayerName.value;
-            if (xmarker == true) {
-                playerMarker = "X";
-            } else if (omarker == true) {
-                playerMarker = "O";
-            };
-        });
+    const dialog = document.querySelector("dialog");
+    submitBtn.addEventListener("click", (event) => {
+        event.preventDefault();        
+        dialog.close();
     });
-    return {GetPlayerInfo, playerName, playerMarker};
-})();
+    const GetPlayerMarker = () => {
+        if (xmarker.checked) {
+            return "X";
+        } else if (omarker.checked) {
+            return "O";
+        };
+    };
+    const GetPlayerName = () => playerName.value;
+    dialog.showModal();
+    return {GetPlayerName, GetPlayerMarker};
+};
 
 const Gameboard = (function () {
     const array = ["", "", "", "", "", "", "", "", ""];
     const startBtn = document.querySelector("#startButton");
+    let player1Name = "";    
     startBtn.addEventListener("click", () => {
-        Player.GetPlayerInfo();
+        const player1 = Player();
+        player1Name = player1.GetPlayerName();  
         const topLeft = document.querySelector("#tl");
         topLeft.addEventListener("click", () => {
-            array[0] = "X";
-            topLeft.innerHTML = "X";
+            array[0] = player1.GetPlayerMarker();
+            topLeft.innerHTML = player1.GetPlayerMarker();
             Game(array);
         });
         const topCenter = document.querySelector("#tc");
         topCenter.addEventListener("click", () => {
-            array[1] = "X";
-            topCenter.innerHTML = "X";
+            array[1] = player1.GetPlayerMarker();
+            topCenter.innerHTML = player1.GetPlayerMarker();
             Game(array);
         });
         const topRight = document.querySelector("#tr");
         topRight.addEventListener("click", () => {
-            array[2] = "X";
-            topRight.innerHTML = "X";
+            array[2] = player1.GetPlayerMarker();
+            topRight.innerHTML = player1.GetPlayerMarker();
             Game(array);
         });
         const middleLeft = document.querySelector("#ml");
         middleLeft.addEventListener("click", () => {
-            array[3] = "X";
-            middleLeft.innerHTML = "X";
+            array[3] = player1.GetPlayerMarker();
+            middleLeft.innerHTML = player1.GetPlayerMarker();
             Game(array);
         });
         const middleCenter = document.querySelector("#mc");
         middleCenter.addEventListener("click", () => {
-            array[4] = "X";
-            middleCenter.innerHTML = "X";
+            array[4] = player1.GetPlayerMarker();
+            middleCenter.innerHTML = player1.GetPlayerMarker();
             Game(array);
         });
         const middleRight = document.querySelector("#mr");
         middleRight.addEventListener("click", () => {
-            array[5] = "X";
-            middleRight.innerHTML = "X";
+            array[5] = player1.GetPlayerMarker();
+            middleRight.innerHTML = player1.GetPlayerMarker();
             Game(array);
         });
         const bottomLeft = document.querySelector("#bl");
         bottomLeft.addEventListener("click", () => {
-            array[6] = "X";
-            bottomLeft.innerHTML = "X";
+            array[6] = player1.GetPlayerMarker();
+            bottomLeft.innerHTML = player1.GetPlayerMarker();
             Game(array);
         });
         const bottomCenter = document.querySelector("#bc");
         bottomCenter.addEventListener("click", () => {
-            array[7] = "X";
-            bottomCenter.innerHTML = "X";
+            array[7] = player1.GetPlayerMarker();
+            bottomCenter.innerHTML = player1.GetPlayerMarker();
             Game(array);
         });
         const bottomRight = document.querySelector("#br");
         bottomRight.addEventListener("click", () => {
-            array[8] = "X";
-            bottomRight.innerHTML = "X";
+            array[8] = player1.GetPlayerMarker();
+            bottomRight.innerHTML = player1.GetPlayerMarker();
             Game(array);
         });
     });
@@ -91,8 +93,16 @@ const Gameboard = (function () {
             array[i] = "";
         };
     });
-    
     resetBtn.addEventListener("click", Reset);
+
+    const result = document.querySelector("#result");
+    if (Game.xwinner == true) {
+        result.textContent = "WINNER X: " + player1Name;
+    } else if (Game.owinner == true) {
+        result.textContent = "WINNER O: " + player1Name;
+    } else if (Game.tie == true) {
+        result.textContent = "WINNER: TIE";
+    };
     return {Reset};
 })();
 
@@ -100,7 +110,6 @@ function Game(array) {
     let xwinner = false;
     let owinner = false;
     let tie = false;
-    const result = document.querySelector("#result");
     if (array[0] == "X" && array[1] == "X" && array[2] == "X") {
         xwinner = true;
         Gameboard.Reset();
@@ -153,11 +162,5 @@ function Game(array) {
         tie = true;
         Gameboard.Reset();
     };
-    if (xwinner == true) {
-        result.textContent = "WINNER: X";
-    } else if (owinner == true) {
-        result.textContent = "WINNER: O";
-    } else if (tie == true) {
-        result.textContent = "WINNER: TIE";
-    };
+    return {xwinner, owinner, tie};
 };
