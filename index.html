@@ -8,6 +8,24 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+    <dialog>
+        <form method="dialog" id="new_entry">
+            <h2>Player Info</h2>
+            <div>
+                <label for="player_name">PLAYER NAME: </label>
+                <input type="text" id="player_name"/>
+            </div>
+            <div>
+                <legend>MARKER: </legend>
+                <label><input type="radio" name="marker" id="xmarker" value="X" /> X</label>
+                <label><input type="radio" name="marker" id="omarker" value="O" /> O</label>
+            </div>
+            <div class="form_button_container">
+                <button id="submit_button">SUBMIT</button>
+                <button id="close_button">CANCEL</button>
+            </div>
+        </form>
+    </dialog>
     <div class="container">
         <div class="box" id="tl"></div>
         <div class="box" id="tc"></div>
@@ -24,7 +42,7 @@
         <button id="resetButton">RESET</button>
     </div>
     <div class="scoreContainer">
-        <div>SCORE: </div>
+        <div id="result">WINNER: </div>
     </div>
 </body>
 </html>

@@ -1,5 +1,9 @@
 {
     "cSpell.ignoreWords": [
-        "Gameboard"
+        "Gameboard",
+        "omarker",
+        "owinner",
+        "xmarker",
+        "xwinner"
     ]
 }
