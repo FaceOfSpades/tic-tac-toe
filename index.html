@@ -9,17 +9,31 @@
 </head>
 <body>
     <dialog>
-        <form method="dialog" id="new_entry">
-            <h2>Player Info</h2>
-            <div>
-                <label for="player_name">PLAYER NAME: </label>
-                <input type="text" id="player_name"/>
-            </div>
-            <div>
-                <legend>MARKER: </legend>
-                <label><input type="radio" name="marker" id="xmarker" value="X" /> X</label>
-                <label><input type="radio" name="marker" id="omarker" value="O" /> O</label>
-            </div>
+        <form method="dialog">
+            <fieldset>
+                <h2>Player 1 Info</h2>
+                <div>
+                    <label for="player_name">PLAYER NAME: </label>
+                    <input type="text" id="player_name"/>
+                </div>
+                <div>
+                    <legend>MARKER: </legend>
+                    <label><input type="radio" name="marker" id="xmarker" value="X" checked="checked" /> X</label>
+                    <label><input type="radio" name="marker" id="omarker" value="O" /> O</label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <h2>Player 2 Info</h2>
+                <div>
+                    <label for="player2_name">PLAYER NAME: </label>
+                    <input type="text" id="player2_name"/>
+                </div>
+                <div>
+                    <legend>MARKER: </legend>
+                    <label><input type="radio" name="marker2" id="xmarker2" value="X" /> X</label>
+                    <label><input type="radio" name="marker2" id="omarker2" value="O" checked="checked" /> O</label>
+                </div>
+            </fieldset>
             <div class="form_button_container">
                 <button id="submit_button">SUBMIT</button>
                 <button id="close_button">CANCEL</button>
@@ -42,7 +56,7 @@
         <button id="resetButton">RESET</button>
     </div>
     <div class="scoreContainer">
-        <div id="result">WINNER: </div>
+        <div id="result">SCORE</div>
     </div>
 </body>
 </html>
