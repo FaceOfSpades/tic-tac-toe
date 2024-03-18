@@ -27,7 +27,9 @@ function Player () {
         };
     };
     const GetPlayer2Name = () => player2Name.value;
-    return {Player1Wins, GetPlayer1Score, Player2Wins, GetPlayer2Score, GetPlayerName, GetPlayerMarker, GetPlayer2Name, GetPlayer2Marker};
+    const ResetPlayer1Score = () => player1Score = 0;
+    const ResetPlayer2Score = () => player2Score = 0;
+    return {ResetPlayer1Score, ResetPlayer2Score, Player1Wins, GetPlayer1Score, Player2Wins, GetPlayer2Score, GetPlayerName, GetPlayerMarker, GetPlayer2Name, GetPlayer2Marker};
 };
 
 const Gameboard = (function () {
@@ -38,6 +40,8 @@ const Gameboard = (function () {
     const result = document.querySelector("#result");
     const player1 = document.createElement("div");
     const player2 = document.createElement("dvi");
+    player1.classList.add("player1");
+    player2.classList.add("player2");
     const player1Score = document.createElement("div");
     const player2Score = document.createElement("div");
     let player1Name = "";
@@ -50,9 +54,18 @@ const Gameboard = (function () {
         const players = Player();
         dialog.showModal();
         submitBtn.addEventListener("click", (event) => {
+            startBtn.textContent = "NEW GAME";
             event.preventDefault();
-            player1Name = players.GetPlayerName();
-            player2Name = players.GetPlayer2Name();
+            winners.ResetPlayer1Score();
+            winners.ResetPlayer2Score();
+            player1Name = players.GetPlayerName().toUpperCase();
+            player2Name = players.GetPlayer2Name().toUpperCase();
+            if (player1Name == "") {
+                player1Name = "PLAYER 1";
+            };
+            if (player2Name == "") {
+                player2Name = "PLAYER 2";
+            };
             player1Marker = players.GetPlayerMarker();
             player2Marker = players.GetPlayer2Marker();
             player1.textContent = player1Name;
@@ -221,6 +234,7 @@ const Gameboard = (function () {
         player2.appendChild(player2ScoreUpdate);
     });
     const winner = document.createElement("span");
+    winner.classList.add("winner");
     const winners = Player();
     const DisplayWinner = (function(xwinner, owinner, tie) {
         if (xwinner == true && player1Marker == "X") {

@@ -50,10 +50,60 @@ button {
     position: absolute;
     top: 50px;
     left: 50px;
-    width: auto;
+    width: 550px;
     background-color: gray;
     font-size: 40px;
     font-weight: 800;
     border-radius: 15px;
     padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 5px 20px;
+}
+
+#score {
+    grid-column: span 2;
+}
+
+.winner {
+    grid-column: span 2;
+}
+
+form {
+    background-color: gray;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    padding: 5px;
+    font-size: 18px;
+}
+
+fieldset {
+    border-radius: 15px;
+    margin: 5px;
+}
+
+h2 {
+    text-align: center;
+}
+
+form button {
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 15px;
+    padding: 15px 25px;
+    background-color: lightgray;
+    margin: 10px;
+    margin-left: 25px;
+}
+
+dialog {
+    background-color: black;
+    padding: 450px 400px;
+}
+
+.player1,
+.player2 {
+    text-align: center;
 }
